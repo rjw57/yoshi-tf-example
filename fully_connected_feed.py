@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import os.path
 import time
 
@@ -28,6 +29,15 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 from tensorflow.examples.tutorials.mnist import mnist
 
+# If there's a JOB_NAME and JOB_ID environment defined then use yoshi's
+# scratch space for output
+if 'JOB_NAME' in os.environ and 'JOB_ID' in os.environ:
+    DEF_TRAIN_DIR = os.path.join(
+        '/scratch', '{JOB_NAME}.{JOB_ID}.train'.format(**os.environ))
+    print('Detected running as batch job')
+    print('Outputting data to {}'.format(DEF_TRAIN_DIR))
+else:
+    DEF_TRAIN_DIR = 'data'
 
 # Basic model parameters as external flags.
 flags = tf.app.flags
@@ -38,7 +48,7 @@ flags.DEFINE_integer('hidden1', 128, 'Number of units in hidden layer 1.')
 flags.DEFINE_integer('hidden2', 32, 'Number of units in hidden layer 2.')
 flags.DEFINE_integer('batch_size', 100, 'Batch size.  '
                      'Must divide evenly into the dataset sizes.')
-flags.DEFINE_string('train_dir', 'data', 'Directory to put the training data.')
+flags.DEFINE_string('train_dir', DEF_TRAIN_DIR, 'Directory to put the training data.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data '
                      'for unit testing.')
 
