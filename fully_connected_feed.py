@@ -37,6 +37,7 @@ if 'JOB_NAME' in os.environ and 'JOB_ID' in os.environ:
     print('Detected running as batch job')
     print('Outputting data to {}'.format(DEF_TRAIN_DIR))
 else:
+    print(os.environ)
     DEF_TRAIN_DIR = 'data'
 
 # Basic model parameters as external flags.
