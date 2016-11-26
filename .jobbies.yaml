@@ -1,7 +1,5 @@
 language: python
-apt:
-    - cowsay
-    - cmake
+apt: cowsay
 install: pip install tox
 script:
     - tox
