@@ -33,7 +33,7 @@ from tensorflow.examples.tutorials.mnist import mnist
 # scratch space for output
 if 'JOB_NAME' in os.environ and 'JOB_ID' in os.environ:
     DEF_TRAIN_DIR = os.path.join(
-        '/scratch', '{JOB_NAME}.{JOB_ID}.train'.format(**os.environ))
+        '/workspace', '{JOB_NAME}.{JOB_ID}.train'.format(**os.environ))
     print('Detected running as batch job')
     print('Outputting data to {}'.format(DEF_TRAIN_DIR))
 else:
