@@ -1,6 +1,6 @@
 language: python
 apt: cowsay
-install: pip install tox
+install: pip install -r requirements.txt
 script:
-    - tox
+    - python fully_connected_feed.py
     - cowsay All finished!
